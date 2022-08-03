@@ -8,4 +8,4 @@ Utilize os seguintes comandos
 
 - php artisan key:generate -> Chave unica para utilizar funcionalidades que exigem criptografia dentro dos APIs do Illuminate.
 
-teste 123
+teste
