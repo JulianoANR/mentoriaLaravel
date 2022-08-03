@@ -7,5 +7,3 @@ Utilize os seguintes comandos
 - composer update -> Isso irá criar a pasta "vendor". E a mesma é crucial para a utilização do Laravel.
 
 - php artisan key:generate -> Chave unica para utilizar funcionalidades que exigem criptografia dentro dos APIs do Illuminate.
-
-teste
