@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\loginRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Services\UserService;
 
 class loginController extends Controller
 {
@@ -19,7 +20,8 @@ class loginController extends Controller
         ];
 
         if(Auth::attempt($credentials)){
-            return redirect()->route('participant.dashboard.index');
+            $userRole = auth()->user()->role;
+            return redirect(UserService::getDashboardRouteBasedOnUserRole($userRole));
         }
 
         return  redirect()->route('auth.login.create')->with('warning', 'Autenticação falhou')->withInput();

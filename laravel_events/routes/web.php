@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\{loginController, registerController};
-use App\Http\Controllers\Participant\Dashboard\dashboardController;
+use App\Http\Controllers\Participant\Dashboard\dashboardController as participanteDashboardController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Organization\Dashboard\dashboardController as organizationDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// GRUPO DE ROTAS
+// GRUPO DE ROTAS QUE COMEÇAM COM AUTH
     Route::group(['as' => 'auth.'], function(){
         Route::group(['middleware' => 'guest'], function(){
             // REGISTRO
@@ -31,5 +32,10 @@ use Illuminate\Support\Facades\Route;
     Route::post('logout', [loginController::class, 'destroy'])->name('login.destroy')->middleware('auth');
     });
 
-// INICIO
-    Route::get('participant/dashboard', [dashboardController::class, 'index'])->name('participant.dashboard.index')->middleware('auth');
+// GRUPO DE ROTAS QUE UTILIZAM O MIDDLEWARE AUTH    
+Route::group(['middleware' => 'auth'], function(){
+    // INICIO PARTICIPANTE
+        Route::get('participant/dashboard', [participanteDashboardController::class, 'index'])->name('participant.dashboard.index')->middleware('role:participant');
+    // INICIO ORGANIZAÇÃO
+        Route::get('organization/dashboard', [organizationDashboardController::class, 'index'])->name('organization.dashboard.index')->middleware('role:organization'); 
+});
