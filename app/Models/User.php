@@ -18,5 +18,14 @@ class User extends Model
         'role'
     ];
 
-    //protected $table = 'users';
+    //Não retornara o campo password
+    protected $hidden = [
+        'password'
+    ];
+
+    //mutators
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 }

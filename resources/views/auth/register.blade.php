@@ -14,27 +14,67 @@
 
     <div class="card shadow my-5 w-75 mx-auto">
         <div class="card-body">
-            <form action="{{route('auth.register.store')}}" method="POST">
+            <form action="{{ route('auth.register.store') }}" method="POST">
                 @csrf
                 <div class="row">
                     <div class="col-12">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="name" placeholder="Nome">
+                            <input type="text" class="form-control" name="user[name]" placeholder="Nome">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="email" class="form-control" name="email" placeholder="E-mail">
+                            <input type="email" class="form-control" name="user[email]" placeholder="E-mail">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="cpf" placeholder="CPF">
+                            <input type="text" class="form-control" name="user[cpf]" placeholder="CPF">
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-group">
-                            <input type="password" class="form-control" name="password" placeholder="Senha">
+                            <input type="password" class="form-control" name="user[password]" placeholder="Senha">
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row mt-4">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="text" name="adrress[cep]" class="form-control" placeholder="CEP">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <input type="text" name="adrress[uf]" class="form-control" placeholder="UF">
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <input type="text" name="adrress[city]" class="form-control" placeholder="Cidade">
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <input type="text" name="adrress[street]" class="form-control" placeholder="Logradouro">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="text" name="adrress[number]" class="form-control" placeholder="Número">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="adrress[district]" class="form-control" placeholder="Bairro">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="adrress[complement]" class="form-control" placeholder="Complemento">
+                            </div>
                         </div>
                     </div>
 

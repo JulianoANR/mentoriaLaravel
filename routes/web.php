@@ -15,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('register', [RegisterController::class,  'create'])->name('auth.register.create');
-Route::post('register', [ RegisterController::class, 'store'])->name('auth.register.store');
+Route::post('register', [RegisterController::class, 'store'])->name('auth.register.store');
