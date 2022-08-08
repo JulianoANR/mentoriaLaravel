@@ -16,7 +16,7 @@ class RegisterRequest extends FormRequest
             'user.name' => 'required',
             'user.email' => ['required', 'email', 'unique:users,email'],
             'user.cpf' => ['required', new Cpf, 'unique:users,cpf'],
-            'user.password' => ['required', 'size:14', 'confirmed'],
+            'user.password' => ['required', 'size:3', 'confirmed'], //O TAMANHO É 14 PORÉM PARA MANTER MINHA SANIDADE EU COLOQUEI 3
             'phones.0.number' => ['required', 'size:14'],
             'phones.1.number' => ['required', 'size:15'],
             'address.cep' => 'required',

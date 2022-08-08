@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
-use App\Models\{User, Address};
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Stmt\TryCatch;
 
 class registerController extends Controller
 {
@@ -17,7 +16,7 @@ class registerController extends Controller
     public function store(RegisterRequest $request){
         $data = $request->validated();
 
-        $data['user']['role'] = 'participante';
+        $data['user']['role'] = 'participant';
 
         DB::beginTransaction();
         try{
@@ -31,7 +30,7 @@ class registerController extends Controller
 
             DB::commit();
 
-            // return 'Conta criada com sucesso';
+            return redirect()->route('auth.login.create')->with('success', 'Conta criada com sucesso! Efetue o login');
         } catch(\Exception $exception){
             DB::rollBack();
             return 'Mesangem: '.$exception->getMessage();
