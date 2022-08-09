@@ -58,7 +58,8 @@
                         </div>
                         <div class="col-md-9">
                             <div class="form-group">
-                                <input type="text" name="address[street]" class="form-control" placeholder="Logradouro">
+                                <input type="text" name="address[street]" class="form-control"
+                                    placeholder="Logradouro">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -68,12 +69,31 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" name="address[district]" class="form-control" placeholder="Bairro">
+                                <input type="text" name="address[district]" class="form-control"
+                                    placeholder="Bairro">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" name="address[complement]" class="form-control" placeholder="Complemento">
+                                <input type="text" name="address[complement]" class="form-control"
+                                    placeholder="Complemento">
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="phones[0][number]" class="form-control"
+                                    placeholder="Telefone">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="phones[1][number]" class="form-control"
+                                    placeholder="Celular">
                             </div>
                         </div>
                     </div>

@@ -28,6 +28,10 @@ class User extends Model
         return $this->hasOne(Address::class);
     }
 
+    public function phones(){
+        return $this->hasMany(Phone::class);
+    }
+
     //mutators
     public function setPasswordAttribute($value)
     {
