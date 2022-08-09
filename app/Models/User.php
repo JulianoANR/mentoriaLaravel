@@ -23,6 +23,11 @@ class User extends Model
         'password'
     ];
 
+    //relationships
+    public function address(){
+        return $this->hasOne(Address::class);
+    }
+
     //mutators
     public function setPasswordAttribute($value)
     {

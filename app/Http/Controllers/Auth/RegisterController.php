@@ -25,10 +25,7 @@ class RegisterController extends Controller
 
 
         $user = User::create($requestData['user']);
-
-        $requestData['address']['user_id'] = $user->id;
-
-        Address::create($requestData['address']);
+        $user->address()->create($requestData['address']);
 
     }
 }
