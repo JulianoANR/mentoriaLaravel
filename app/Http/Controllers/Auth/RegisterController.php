@@ -19,16 +19,16 @@ class RegisterController extends Controller
 
         $requestData = $request->all();
 
-        return $requestData;
+        // return $requestData;
 
-        // $requestData['user']['role'] = 'participant';
+        $requestData['user']['role'] = 'participant';
 
 
-        // $user = User::create($requestData['user']);
+        $user = User::create($requestData['user']);
 
-        // $requestData['address']['user_id'] = $user->id;
+        $requestData['address']['user_id'] = $user->id;
 
-        // Address::create($requestData['address']);
+        Address::create($requestData['address']);
 
     }
 }

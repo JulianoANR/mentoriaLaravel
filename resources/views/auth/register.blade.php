@@ -43,37 +43,37 @@
                     <div class="row mt-4">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <input type="text" name="adrress[cep]" class="form-control" placeholder="CEP">
+                                <input type="text" name="address[cep]" class="form-control" placeholder="CEP">
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <input type="text" name="adrress[uf]" class="form-control" placeholder="UF">
+                                <input type="text" name="address[uf]" class="form-control" placeholder="UF">
                             </div>
                         </div>
                         <div class="col-md-7">
                             <div class="form-group">
-                                <input type="text" name="adrress[city]" class="form-control" placeholder="Cidade">
+                                <input type="text" name="address[city]" class="form-control" placeholder="Cidade">
                             </div>
                         </div>
                         <div class="col-md-9">
                             <div class="form-group">
-                                <input type="text" name="adrress[street]" class="form-control" placeholder="Logradouro">
+                                <input type="text" name="address[street]" class="form-control" placeholder="Logradouro">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <input type="text" name="adrress[number]" class="form-control" placeholder="Número">
+                                <input type="text" name="address[number]" class="form-control" placeholder="Número">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" name="adrress[district]" class="form-control" placeholder="Bairro">
+                                <input type="text" name="address[district]" class="form-control" placeholder="Bairro">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" name="adrress[complement]" class="form-control" placeholder="Complemento">
+                                <input type="text" name="address[complement]" class="form-control" placeholder="Complemento">
                             </div>
                         </div>
                     </div>
