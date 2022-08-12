@@ -3,7 +3,10 @@
 use App\Http\Controllers\Auth\{loginController, registerController};
 use App\Http\Controllers\Participant\Dashboard\dashboardController as participanteDashboardController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Organization\Dashboard\dashboardController as organizationDashboardController;
+use App\Http\Controllers\Organization\{
+    Dashboard\dashboardController as organizationDashboardController,
+    Event\eventController
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +39,20 @@ use App\Http\Controllers\Organization\Dashboard\dashboardController as organizat
 Route::group(['middleware' => 'auth'], function(){
     // INICIO PARTICIPANTE
         Route::get('participant/dashboard', [participanteDashboardController::class, 'index'])->name('participant.dashboard.index')->middleware('role:participant');
-    // INICIO ORGANIZAÇÃO
-        Route::get('organization/dashboard', [organizationDashboardController::class, 'index'])->name('organization.dashboard.index')->middleware('role:organization'); 
+    
+    // GRUPO DE ROTAS QUE UTILIZAM O MESMO PREFIXO, AS E MIDDLEWARE
+    Route::group(['prefix' => 'organization', 'as' => 'organization.', 'middleware' => 'role:organization'], function(){
+        // INICIO ORGANIZAÇÃO
+            Route::get('dashboard', [organizationDashboardController::class, 'index'])->name('dashboard.index');
+        
+        // INICIO DOS EVENTOS
+            Route::get('events', [eventController::class, 'index'])->name('events.index');
+    
+        // CRIAÇÃO DOS EVENTOS
+            Route::get('events/create', [eventController::class, 'create'])->name('events.create');
+            Route::post('events', [eventController::class, 'store'])->name('events.store');
+            Route::get('events/{event}/edit', [eventController::class, 'edit'])->name('events.edit');
+            Route::put('events/{event}', [eventController::class, 'update'])->name('events.update');
+            Route::delete('events/{event}', [eventController::class, 'destroy'])->name('events.destroy');
+    });
 });
