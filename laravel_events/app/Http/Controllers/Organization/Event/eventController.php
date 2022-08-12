@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Organization\Event;
 
 use App\Http\Controllers\Controller;
-use App\Models\Event;
+use App\Models\{Event, User};
 use App\Http\Requests\Organization\Event\eventRequest;
 use Illuminate\Http\Request;
+use App\Services\EventService;
 
 class eventController extends Controller
 {
@@ -32,10 +33,22 @@ class eventController extends Controller
         return redirect()->route('organization.events.index')->with('success', 'Evento cadastrado com sucesso');
     }
 
-    public function edit(Event $event){
-        return view('organization.events.edit', [
-            'event' => $event
+    public function show(Event $event){
+        return view('organization.events.show', [
+            'event' => $event,
+            'eventStartDateHasPassed' => EventService::eventStartDateHasPassed($event),
+            'eventEndDateHasPassed' => EventService::eventEndDateHasPassed($event),
+            'allParticipantUsers' => User::query()
+                ->where('role', 'participant')
+                ->whereDoesntHave('events', function($query) use($event){
+                    $query->where('id', $event->id);
+                })
+                ->get()
         ]);
+    }
+
+    public function edit(Event $event){
+        return view('organization.events.edit', ['event' => $event]);
     }
 
     public function update(Event $event, eventRequest $request){

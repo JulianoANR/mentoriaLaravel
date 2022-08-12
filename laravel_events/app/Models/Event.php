@@ -12,8 +12,13 @@ class Event extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = ['name', 'speaker_name', 'start_date', 'end_date', 'target_audience', 'participants_limit'];
+    
+    //relationships
+    public function users(){
+        return $this->belongsToMany(User::class)->withPivot('present');
+    }
 
-    // MUTATORS
+    //mutators
     public function setStartDateAttribute($value) {
         $this->attributes['start_date'] = Carbon::createFromFormat('d/m/Y H:i', $value)->format('Y-m-d H:i:s');
     }
@@ -23,7 +28,7 @@ class Event extends Model
         ->format('Y-m-d H:i:s');
     }
 
-    // ACCESSORS
+    //accessors
     public function getStartDateFormattedAttribute() {
         return Carbon::parse($this->start_date)->format('d/m/Y H:i');
     }

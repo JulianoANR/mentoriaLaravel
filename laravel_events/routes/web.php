@@ -5,7 +5,9 @@ use App\Http\Controllers\Participant\Dashboard\dashboardController as participan
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Organization\{
     Dashboard\dashboardController as organizationDashboardController,
-    Event\eventController
+    Event\eventController,
+    Event\eventPresenceController,
+    Event\eventSubscriptionController
 };
 
 /*
@@ -48,11 +50,10 @@ Route::group(['middleware' => 'auth'], function(){
         // INICIO DOS EVENTOS
             Route::get('events', [eventController::class, 'index'])->name('events.index');
     
-        // CRIAÇÃO DOS EVENTOS
-            Route::get('events/create', [eventController::class, 'create'])->name('events.create');
-            Route::post('events', [eventController::class, 'store'])->name('events.store');
-            Route::get('events/{event}/edit', [eventController::class, 'edit'])->name('events.edit');
-            Route::put('events/{event}', [eventController::class, 'update'])->name('events.update');
-            Route::delete('events/{event}', [eventController::class, 'destroy'])->name('events.destroy');
+        // CRUD DOS EVENTOS
+            Route::post('events/{event}/subscriptions', [eventSubscriptionController::class, 'store'])->name('events.subscriptions.store');
+            Route::delete('events/{event}/subscriptions/{user}', [eventSubscriptionController::class, 'destroy'])->name('events.subscriptions.destroy');
+            Route::post('events/{event}/presences/{user}', eventPresenceController::class)->name('events.presences');
+            Route::resource('events', eventController::class);
     });
 });

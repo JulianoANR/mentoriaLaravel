@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Http\Middleware\Authenticate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -29,5 +28,9 @@ class User extends Authenticatable
 
         public function phones(){
             return $this->hasMany(Phone::class);
+        }
+
+        public function events(){
+            return $this->belongsToMany(Event::class);
         }
 }
