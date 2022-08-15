@@ -39,5 +39,7 @@ class UserController extends Controller
         ]); */
 
         User::create($requestData);
+
+        return redirect()->route('user.index');
     }
 }

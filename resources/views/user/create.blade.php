@@ -1,28 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
+@section('content')
+<a href="{{ route('user.index') }}">Listagem de usuarios</a>
+<br><br>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cadastro</title>
-</head>
+<form action="{{ route('user.store') }}" method="POST">
+    @csrf
+    <label>Nome</label>
+    <input type="text" name="name">
 
-<body>
-    <form action="/user" method="POST">
-        @csrf
-        <label>Nome</label>
-        <input type="text" name="name">
+    <br>
 
-        <br>
+    <label>E-mail</label>
+    <input type="text" name="email">
 
-        <label>E-mail</label>
-        <input type="text" name="email">
+    <br>
 
-        <br>
-
-        <button type="submit">Cadastrar</button>
-    </form>
-</body>
-
-</html>
+    <button type="submit">Cadastrar</button>
+</form>
+@endsection
