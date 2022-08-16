@@ -7,10 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
+
+    protected $table = 'users';
+
     use HasFactory;
 
     protected $fillable = [
         'name',
-        'email'
+        'email',
+        'cpf',
+        'password',
+        'role'
     ];
+
+    protected $hidden = [
+        'password'
+    ];
+
+    //mutators
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 }

@@ -49,3 +49,4 @@ Route::post('user', [UserController::class, 'store'])->name('user.store');
  */
 
 Route::get('register', [RegisterController::class, 'create'])->name('auth.register.create');
+Route::post('register', [RegisterController::class, 'store'])->name('auth.register.store');
