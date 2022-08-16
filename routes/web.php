@@ -1,7 +1,11 @@
 <?php
 
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\{
+    RegisterController,
+    LoginController
+};
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Participant\Dashboard\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('register', [RegisterController::class,  'create'])->name('auth.register.create');
 Route::post('register', [RegisterController::class, 'store'])->name('auth.register.store');
+
+Route::get('participant/dashboard', [DashboardController::class,  'index'])->name('participant.dashboard.index')->middleware('auth');
+
+Route::get('login', [LoginController::class, 'create'])->name('auth.login.create');
