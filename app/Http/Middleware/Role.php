@@ -4,22 +4,16 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-
+use App\Services\UserService;
 class Role
 {
 
     public function handle(Request $request, Closure $next, $role)
     {
-        $useRole = auth()->user()->role;
+        $userRole = auth()->user()->role;
 
-        if ($useRole !== $role) {
-            if ($useRole === 'participant') {
-                return redirect()->route('participant.dashboard.index');
-            }
-
-            if ($useRole === 'organization') {
-                return redirect()->route('organization.dashboard.index');
-            }
+        if ($userRole !== $role) {
+            return redirect(UserService::getDashboardRouteBaseOnUserRole($userRole));
         }
 
         return $next($request);
