@@ -23,7 +23,15 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect()->route('participant.dashboard.index');
+                $useRole = auth()->user()->role;
+
+                if ($useRole === 'participant') {
+                    return redirect()->route('participant.dashboard.index');
+                }
+
+                if ($useRole === 'organization') {
+                    return redirect()->route('organization.dashboard.index');
+                }
             }
         }
 

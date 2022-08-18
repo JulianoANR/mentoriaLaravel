@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Support\Facades\Auth;
+
 class LoginController extends Controller
 {
     //
@@ -20,14 +21,24 @@ class LoginController extends Controller
             'password' => $request->password
         ];
 
-        if(Auth::attempt($credentials)){
-          return redirect()->route('participant.dashboard.index');
+        if (Auth::attempt($credentials)) {
+
+            $useRole = auth()->user()->role;
+
+            if ($useRole === 'participant') {
+                return redirect()->route('participant.dashboard.index');
+            }
+
+            if ($useRole === 'organization') {
+                return redirect()->route('organization.dashboard.index');
+            }
         }
 
         return redirect()->route('auth.login.create')->with('warning', 'Autenticação falhou')->withInput();
     }
 
-    public function destroy(){
+    public function destroy()
+    {
         Auth::logout();
         return redirect()->route('auth.login.create');
     }
