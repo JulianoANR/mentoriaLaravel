@@ -3,18 +3,21 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Registro</title>
+    <title>Registre-se</title>
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/sb-admin-2.min.css') }}">
 </head>
-{{-- Instalar pacote composer laravel-pt-br VIDEO3: 20m --}}
+
+
 <body>
     <h1 class="text-center my-4">Criar conta</h1>
 
     <div class="card shadow my-5 w-75 mx-auto">
         <div class="card-body">
+
+
 
             <form action="{{ route('auth.register.store') }}" method="POST">
                 @csrf

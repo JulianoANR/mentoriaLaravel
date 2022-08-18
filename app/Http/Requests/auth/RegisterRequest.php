@@ -59,4 +59,5 @@ class RegisterRequest extends FormRequest
             'address.complement' => 'complemento'
         ];
     }
+
 }
