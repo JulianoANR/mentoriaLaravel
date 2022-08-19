@@ -143,7 +143,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <input type="text" name="phones[1][number]"
-                                class="form-control celphone {{ $errors->has('phones.1.number') ? 'is-invalid' : '' }}"
+                                class="form-control cellphone {{ $errors->has('phones.1.number') ? 'is-invalid' : '' }}"
                                 placeholder="Celular" value="{{ old('phones.1.number') }}">
                             <div class="invalid-feedback">{{ $errors->first('phones.1.number') }}</div>
                         </div>
