@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class User extends Authenticatable
 {
     use HasFactory;
 
@@ -25,6 +25,11 @@ class User extends Model
     public function adress()
     {
         return $this->hasOne(Address::class);
+    }
+
+    public function events()
+    {
+        return $this->belongsToMany(Event::class);
     }
 
     public function phones()

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\Cpf;
 
 class RegisterRequest extends FormRequest
 {
@@ -17,9 +18,9 @@ class RegisterRequest extends FormRequest
     {
         return [
             'user.name' => 'required',
-            'user.email' => ['required', 'email'],
-            'user.cpf' => 'required',
-            'user.password' => ['required','min:8'],
+            'user.email' => ['required', 'email', 'unique:users,email'],
+            'user.cpf' => ['required', new Cpf, 'unique:users,cpf'],
+            'user.password' => ['required','min:8','confirmed'],
             'phones.0.number' => ['required', 'size:14'],
             'phones.1.number' => ['required','size:15'],
             'address.cep' => 'required',
@@ -31,4 +32,25 @@ class RegisterRequest extends FormRequest
             'address.complement' =>['nullable', 'max:25']
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'user.name' => 'nome',
+            'user.email' => 'email',
+            'user.cpf' => 'CPF',
+            'user.password' => 'senha',
+            'phones.0.number' => 'telefone',
+            'phones.1.number' => 'celular',
+            'address.cep' => 'CEP',
+            'address.uf' => 'UF',
+            'address.city' =>'cidade',
+            'address.street' =>'rua',
+            'address.number' => 'número',
+            'address.district' => 'bairro',
+            'address.complement' => 'complemento'
+        ];
+    }
+
+    
 }
