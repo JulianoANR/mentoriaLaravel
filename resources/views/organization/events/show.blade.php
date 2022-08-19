@@ -32,14 +32,14 @@
     <div class="card mt-4">
         <div class="card-header bg-primary text-white">Participantes</div>
         <div class="card-body">
-            <form method="POST" action="{{route('organization.events.subscriptions.store', $event->id)}}">
+            <form method="POST" action="{{ route('organization.events.subscriptions.store', $event->id) }}">
                 @csrf
                 <div class="row">
                     <div class="col-12 col-lg-6">
                         <select class="form-control" name="user_id">
                             <option value="">Selecione</option>
                             @foreach ($allParticipantUsers as $user)
-                                <option value="{{$user->id}}">{{$user->name}}</option>
+                                <option value="{{ $user->id }}">{{ $user->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -54,6 +54,12 @@
                     <th class="text-right">Ações</th>
                 </thead>
                 <tbody>
+                    @foreach ($event->users as $user)
+                        <tr>
+                            <td>{{ $user->name }}</td>
+                            <td></td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
