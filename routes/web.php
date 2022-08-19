@@ -6,8 +6,10 @@ use App\Http\Controllers\Auth\{
 };
 use App\Http\Controllers\Organization\{
     Dashboard\DashboardController as OrganizationDashboardController,
-    Events\EventController
+    Events\EventController,
+    Events\EventSubscriptController
 };
+
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Participant\Dashboard\DashboardController as ParticipantDashboardController;
@@ -42,16 +44,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('participant/dashboard', [ParticipantDashboardController::class,  'index'])->name('participant.dashboard.index')->middleware('role:participant');
 
     Route::group(['prefix' => 'organization', 'as' => 'organization.', 'middleware' => 'role:organization'], function () {
+        //dashboard
         Route::get('dashboard', [OrganizationDashboardController::class, 'index'])->name('dashboard.index');
 
-        Route::get('events', [EventController::class, 'index'])->name('events.index');
-
-        Route::get('events/create', [EventController::class, 'create'])->name('events.create');
-
-        Route::post('events', [EventController::class, 'store'])->name('events.store');
-
-        Route::get('events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
-        Route::put('events/{event}', [EventController::class, 'update'])->name('events.update');
-        Route::delete('events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
+        //eventos
+        Route::post('events/{event}/subscriptions', [EventSubscriptController::class, 'store'])
+            ->name('events.subscriptions.store');
+        Route::resource('events', EventController::class);
     });
 });

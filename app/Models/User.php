@@ -32,6 +32,11 @@ class User extends Authenticatable
         return $this->hasMany(Phone::class);
     }
 
+     //Relationships
+     public function events(){
+        return $this->belongsToMany(Events::class);
+    }
+
     //mutators
     public function setPasswordAttribute($value)
     {

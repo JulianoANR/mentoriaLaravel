@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Organization\Events;
 
 use App\Http\Controllers\Controller;
-use App\Models\Events;
+use App\Models\{Events, User};
 use App\Http\Requests\Organization\Event\EventRequest;
 use Illuminate\Console\Scheduling\Event;
 use Illuminate\Http\Request;
@@ -40,9 +40,18 @@ class EventController extends Controller
             ->with('success', 'Evento cadastrado com sucesso!');
     }
 
+    public function show(Events $event)
+    {
+        return view('organization.events.show', [
+            'event' => $event,
+            'allParticipantUsers' => User::query()
+            ->where('role', 'participant')
+            ->get()
+        ]);
+    }
+
     public function edit(Events $event)
     {
-        //$event = Events::findOrFail($id);
 
         return view('organization.events.edit', [
             'event' => $event
