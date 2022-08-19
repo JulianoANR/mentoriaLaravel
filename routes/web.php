@@ -38,6 +38,7 @@ Route::group(['as' => 'auth.'], function () {
 
 
 Route::group(['middleware' => 'auth'], function () {
+
     Route::get('participant/dashboard', [ParticipantDashboardController::class,  'index'])->name('participant.dashboard.index')->middleware('role:participant');
 
     Route::group(['prefix' => 'organization', 'as' => 'organization.', 'middleware' => 'role:organization'], function () {
@@ -46,5 +47,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('events', [EventController::class, 'index'])->name('events.index');
 
         Route::get('events/create', [EventController::class, 'create'])->name('events.create');
+
+        Route::post('events', [EventController::class, 'store'])->name('events.store');
+
+        Route::get('events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
+        Route::put('events/{event}', [EventController::class, 'update'])->name('events.update');
+        Route::delete('events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
     });
 });

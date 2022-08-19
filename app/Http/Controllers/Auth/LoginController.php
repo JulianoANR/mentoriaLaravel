@@ -27,15 +27,18 @@ class LoginController extends Controller
             $userRole = auth()->user()->role;
 
             return redirect(UserService::getDashboardRouteBaseOnUserRole($userRole));
-            
         }
 
-        return redirect()->route('auth.login.create')->with('warning', 'Autenticação falhou')->withInput();
+        return redirect()
+            ->route('auth.login.create')
+            ->with('warning', 'Autenticação falhou')
+            ->withInput();
     }
 
     public function destroy()
     {
         Auth::logout();
-        return redirect()->route('auth.login.create');
+        return redirect()
+            ->route('auth.login.create');
     }
 }

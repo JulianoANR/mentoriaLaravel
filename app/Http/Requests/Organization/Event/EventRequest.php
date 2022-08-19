@@ -6,21 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class EventRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return false;
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
+    
     public function rules()
     {
         return [
@@ -32,9 +18,9 @@ class EventRequest extends FormRequest
             ],
             'end_date' => [
                 'required',
-                'date_format:d/m/Y H:i'
+                'date_format:d/m/Y H:i',
+                'after:' . $this->start_date ?? null,
             ],
-            'after:' . $this->start_date ?? null,
             'participant_limit' => ['numeric', 'integer', 'min:1'],
             'target_audience' => ['required', 'max:150']
         ];
@@ -55,7 +41,8 @@ class EventRequest extends FormRequest
     public function messages()
     {
         return [
-            'date_format' => 'O campo :attribute não corresponde ao formato 00/00/0000 00:00'
+            'date_format' => 'O campo :attribute não corresponde ao formato 00/00/0000 00:00',
+            'end_date.after' => 'A data final deve ser posterior a data inicial.'
         ];
     }
 }
