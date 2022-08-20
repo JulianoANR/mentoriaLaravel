@@ -7,10 +7,10 @@ use App\Http\Controllers\Auth\{
 use App\Http\Controllers\Organization\{
     Dashboard\DashboardController as OrganizationDashboardController,
     Events\EventController,
-    Events\EventSubscriptController
+    Events\EventSubscriptController,
+    Events\EventPresentController
 };
-
-
+use App\Http\Controllers\Organization\Events\EventsPresentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Participant\Dashboard\DashboardController as ParticipantDashboardController;
 
@@ -50,6 +50,9 @@ Route::group(['middleware' => 'auth'], function () {
         //eventos
         Route::post('events/{event}/subscriptions', [EventSubscriptController::class, 'store'])
             ->name('events.subscriptions.store');
+
+        Route::delete('events/{events}/subscriptions/{user}', [EventSubscriptController::class, 'destroy'])->name('events.subscriptions.destroy');
+        Route::post('events/{events}/presences/{user}', EventsPresentController::class)->name('events.presences');
         Route::resource('events', EventController::class);
     });
 });

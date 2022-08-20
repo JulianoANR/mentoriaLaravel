@@ -57,7 +57,37 @@
                     @foreach ($event->users as $user)
                         <tr>
                             <td>{{ $user->name }}</td>
-                            <td></td>
+                            <td class="text-right">
+                                <div class="d-flex align-items-center justify-content-end">
+
+                                    @if ($eventStartDateHasPassed)
+                                        <form method="POST"
+                                            action="{{ route('organization.events.presences', [
+                                                'events' => $event->id,
+                                                'user' => $user->id,
+                                            ]) }}">
+                                            @csrf
+                                            <button
+                                                class="btn btn-sm mr-2 {{ $user->pivot->present ? 'btn-danger' : 'btn-success' }}">{{ $user->pivot->present ? 'Remover Presença' : 'Assinar Presença' }}
+                                            </button>
+                                        </form>
+                                    @endif
+
+
+
+                                    @if (!$eventEndDatePassed)
+                                        <form method="POST"
+                                            action="{{ route('organization.events.subscriptions.destroy', [
+                                                'events' => $event->id,
+                                                'user' => $user->id,
+                                            ]) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-sm btn-danger">Remover inscrição</button>
+                                        </form>
+                                    @endif
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
