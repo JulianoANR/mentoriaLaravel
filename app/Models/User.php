@@ -7,23 +7,22 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    use HasFactory;
 
     protected $table = 'users';
 
-    use HasFactory;
+    protected $fillable = ['name', 'email', 'cpf', 'password', 'role'];
 
-    protected $fillable = [
-        'name',
-        'email',
-        'cpf',
-        'password',
-        'role'
-    ];
+    //hidden
+    protected $hidden = ['password'];
 
-    protected $hidden = [
-        'password'
-    ];
+    //mutators
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 
+    //relationships
     public function address()
     {
         return $this->hasOne(Address::class);
@@ -34,9 +33,8 @@ class User extends Authenticatable
         return $this->hasMany(Phone::class);
     }
 
-    //mutators
-    public function setPasswordAttribute($value)
+    public function events()
     {
-        $this->attributes['password'] = bcrypt($value);
+        return $this->belongsToMany(Event::class);
     }
 }
